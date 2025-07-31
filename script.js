@@ -80,3 +80,5 @@ window.websim.addEventListener('comment:created', (data) => {
     }
 });
 
+// Make handleBecomePremium globally accessible
+window.handleBecomePremium = handleBecomePremium;
