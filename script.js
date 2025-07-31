@@ -12,6 +12,7 @@ async function loadPremiumUsers() {
             .sort((a, b) => (b.comment.card_data.credits_spent || 0) - (a.comment.card_data.credits_spent || 0));
         
         displayUsers(premiumUsers);
+        displayTickerUsers(premiumUsers);
     } catch (error) {
         console.error('Error loading premium users:', error);
         document.getElementById('premium-users').innerHTML = 
@@ -48,6 +49,31 @@ function displayUsers(users) {
                 <div class="user-comment">
                     ${DOMPurify.sanitize(marked.parse(comment.raw_content || 'Thanks for the support!'))}
                 </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function displayTickerUsers(users) {
+    const tickerContainer = document.getElementById('ticker-users');
+    
+    if (users.length === 0) {
+        tickerContainer.innerHTML = '<span class="ticker-user">Become the first Premium supporter! 💎</span>';
+        return;
+    }
+    
+    // Create a longer list by duplicating the users for smooth scrolling
+    const duplicatedUsers = [...users, ...users];
+    
+    tickerContainer.innerHTML = duplicatedUsers.map(({ comment }) => {
+        const credits = comment.card_data?.credits_spent || 0;
+        const avatarUrl = comment.author.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.author.display_name || comment.author.username)}&background=667eea&color=fff`;
+        
+        return `
+            <div class="ticker-user">
+                <img src="${avatarUrl}" alt="${comment.author.display_name || comment.author.username}">
+                <span>${comment.author.display_name || comment.author.username}</span>
+                <span class="ticker-credits">${credits} credits</span>
             </div>
         `;
     }).join('');

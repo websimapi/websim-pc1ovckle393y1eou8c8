@@ -182,6 +182,64 @@ body {
     opacity: 0.8;
 }
 
+.scrolling-ticker {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 0;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.ticker-content {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+}
+
+.ticker-users {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.ticker-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 25px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+    flex-shrink: 0;
+}
+
+.ticker-user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.ticker-credits {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -195,5 +253,22 @@ body {
     .leaderboard {
         padding: 1.5rem;
     }
+    
+    .ticker-content {
+        animation: scroll 20s linear infinite;
+    }
+    
+    .ticker-users {
+        gap: 1rem;
+    }
+    
+    .ticker-user {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .ticker-user img {
+        width: 25px;
+        height: 25px;
+    }
 }
-
