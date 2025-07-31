@@ -62,10 +62,8 @@ function displayTickerUsers(users) {
         return;
     }
     
-    // Create a longer list by duplicating the users for smooth scrolling
-    const duplicatedUsers = [...users, ...users];
-    
-    tickerContainer.innerHTML = duplicatedUsers.map(({ comment }) => {
+    // Create a single array without duplication for smooth infinite scroll
+    tickerContainer.innerHTML = users.map(({ comment }) => {
         const credits = comment.card_data?.credits_spent || 0;
         const avatarUrl = comment.author.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.author.display_name || comment.author.username)}&background=667eea&color=fff`;
         
